@@ -28,7 +28,7 @@ c) Output data format
 
 d) Jupyter python code
 
-e) Google Search scrape method - search on '{ base_name } {state} lat long' and extract latitude, longitude from "tag <div class="Z0LcW">"
+e) Google Search scrape method - search on '{ base_name } {state} lat long' and extract latitude, longitude from tag _<div class="Z0LcW">_
   
 f) MySQl recreate schema SQL - show create table 'base_location'
 
