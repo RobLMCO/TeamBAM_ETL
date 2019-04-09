@@ -16,7 +16,7 @@ Team BAM has been contracted to extract the supplied base data, correlate it wit
 TEAM TASKS:
 
 1) Rob will use Python and Pandas to extract and format the CSV file into a dataframe and export all entries out to a formatted CSV.
-2) Mike will use web scraping of Google to gather location data for each base in another dataframe, using Base Name and State.
+2) Mike will use web scraping (Beautiful Soup) of a Google Search for each base location (name/state) in a new dataframe, using Base Name and State. We will then use pandas to upload the dataframe as a new table 'Base_LatLongs' in MySQL.
 3) Lillian will create the database and tables in MySQL and create a query for showing all sites (base name, lat/long, type, quantity) by either state, command, region, or type.
 4) Team will compile the final report to include the following;
 
