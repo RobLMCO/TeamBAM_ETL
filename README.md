@@ -24,6 +24,6 @@ a) Sample data imports
 b) Formatting challenges and methods
 c) Output data format
 d) Jupyter python code
-e) Google Search scrape method
-f) MySQl recreate schema SQL
+e) Google Search scrape method - search on '{ base_name } {state} lat long' and extract latitude, longitude from tag <div class="Z0LcW">
+f) MySQl recreate schema SQL - show create table 'base_location'
 g) BONUS: Flask based API for search by state, command, region, or type
