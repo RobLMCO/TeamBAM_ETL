@@ -33,3 +33,4 @@ e) Google Search scrape method - search on '{ base_name } {state} lat long' and 
 f) MySQl recreate schema SQL - show create table 'base_location'
 
 5) BONUS: Flask based API for search by state, command, region, or type
+6) Use PyPDF2 to extract table data from the pdf file
