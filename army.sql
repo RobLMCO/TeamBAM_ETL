@@ -34,7 +34,18 @@ where Region = "CONUS";
 select Name, State, Latitude, Longitude, Type, Quantity from base_locations
 where Region = "OCONUS";
 
+show create table base_locations;
 
+CREATE TABLE 'base_locations'(
+'Name' text,
+'State' text
+'Command' text,
+'Region' text,
+'Latitude' double DEFAULT NULL,
+'Longitude' text,
+'Type' text,
+'Quantity' int(11) DEFAULT NULL
+) ENGINE= InnoDB DEFAULT CHARSET =latin1;
 
 select sum(Quantity)
 from base_locations
