@@ -10,7 +10,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 engine = create_engine("sqlite:///Resources/army.sqlite?check_same_thread=False")
 
@@ -23,15 +23,17 @@ Base.prepare(engine, reflect=True)
 Base.classes.keys()
 
 # Save references to each table
-Measurement = Base.classes.measurement
-Station = Base.classes.station
+#Measurement = Base.classes.measurement
+#Station = Base.classes.station
 
 session = Session(engine)
+
+base_locations_dict = {'name:', 'chicken'}
 
 #################################################
 # Flask Setup
 #################################################
-app = Flask(__name__)
+app = Flask('flaskwp1')
 
 
 #################################################
@@ -40,8 +42,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def welcome():
+    
+    return render_template('index.html')
+
+@app.route("/api/v1.0")
+def api():
     """List all available api routes."""
     return (
+        f"API Instructions<br/>"
+        f"<br/>"
         f"Available Routes:<br/>"
         f"/api/v1.0/all<br/>"
         f"/api/v1.0/commands/FORSCOM<br/>"
@@ -50,104 +59,125 @@ def welcome():
         f"/api/v1.0/commands/USARPAC<br/>"
         f"/api/v1.0/commands/USAREUR<br/>"
         f"/api/v1.0/commands/SOF<br/>"
-        f"/api/v1.0/regions<br/>"
-        f"/api/v1.0/types<br/>"
+        f"/api/v1.0/regions/CONUS<br/>"
+        f"/api/v1.0/regions/OCONUS<br/>"
+        f"/api/v1.0/types/Air<br/>"
+        f"/api/v1.0/types/Ground<br/>"
         f"/api/v1.0/report<br/>"
     )
-
+    
 
 @app.route("/api/v1.0/all")
 def all():
     
-    precipitation_data = session.query(Measurement.date, Measurement.prcp).\
-    filter(Measurement.date > last_year).\
-    order_by(Measurement.date).all()
-    precipitation_df=pd.DataFrame(precipitation_data)
-    precipitation_dict = precipitation_df.to_dict()
-
-    return jsonify(precipitation_dict)
+    #tableName = 'someTable'
+    #engine = sqlalchemy.create_engine('connectionString')
+    #Session = scoped_session(sessionmaker(bind=engine))
+    #currentSession = Session()
+    #query = 'IF ('
+                      # 'EXISTS ('
+                      # 'SELECT * FROM INFORMATION_SCHEMA.TABLES '
+                      # 'WHERE TABLE_SCHEMA = \'dbo\' '
+                      # 'AND TABLE_NAME = \'%s\')) '
+                      # 'BEGIN '
+                      # 'DELETE FROM [database].[dbo].[%s] '
+                      # 'END' % (tableName,tableName)
+    #session.execute(query)
+    #print(query)
+    return render_template('ALL.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
 
 @app.route("/api/v1.0/commands/FORSCOM")
 def FORSCOM():
-    stations_data = session.query(Measurement.station).all()
-    
-    return jsonify(stations_data)
+    #stations_data = session.query(Measurement.station).all()
+    return render_template('FORSCOM.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
+
+@app.route("/api/v1.0/commands/CENTCOM")
+def CENTCOM():
+    #stations_data = session.query(Measurement.station).all()
+    return render_template('CENTCOM.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
 @app.route("/api/v1.0/commands/ARNG")
 def ARNG():
     
-    temperature_data = session.query(Measurement.station,Measurement.date, Measurement.tobs).\
-    filter(Measurement.date > last_year).\
-    order_by(Measurement.date).all()
-    temperatures_df=pd.DataFrame(temperature_data)
-    temperatures_dict = temperatures_df.to_dict()
-    return jsonify(temperatures_dict)
+    return render_template('ARNG.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
 @app.route("/api/v1.0/commands/Training")
-def start(start):
-    start_date = start
-    startdate_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date >= start_date).all()
-    return jsonify(startdate_data)
+def TRNG():
+    
+    #startdate_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+    #    filter(Measurement.date >= start_date).all()
+    return render_template('Training.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
 @app.route("/api/v1.0/commands/USARPAC")
-def startend(start,end):
-    start_date = start
-    end_date = end
-    startenddates_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).all()
-
-    return jsonify(startenddates_data)
+def USARPAC():
+    
+    #startenddates_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+    #    filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).all()
+    return render_template('USARPAC.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
 @app.route("/api/v1.0/commands/USAREUR")
-def start(start):
-    start_date = start
-    startdate_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date >= start_date).all()
-    return jsonify(startdate_data)
+def USAREUR():
+    
+    #startdate_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+    #    filter(Measurement.date >= start_date).all()
+    return render_template('USAREUR.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
 @app.route("/api/v1.0/commands/SOF")
-def startend(start,end):
-    start_date = start
-    end_date = end
-    startenddates_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).all()
-
-    return jsonify(startenddates_data)
-
-@app.route("/api/v1.0/regions")
-def regions():
+def SOF():
     
-    precipitation_data = session.query(Measurement.date, Measurement.prcp).\
-    filter(Measurement.date > last_year).\
-    order_by(Measurement.date).all()
-    precipitation_df=pd.DataFrame(precipitation_data)
-    precipitation_dict = precipitation_df.to_dict()
+    #startenddates_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+    #    filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).all()
+    return render_template('SOCCOM.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
-    return jsonify(precipitation_dict)
-
-@app.route("/api/v1.0/types")
-def types():
+@app.route("/api/v1.0/commands/TRADOC")
+def TRADOC():
     
-    precipitation_data = session.query(Measurement.date, Measurement.prcp).\
-    filter(Measurement.date > last_year).\
-    order_by(Measurement.date).all()
-    precipitation_df=pd.DataFrame(precipitation_data)
-    precipitation_dict = precipitation_df.to_dict()
+    #startenddates_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+    #    filter(Measurement.date >= start_date).filter(Measurement.date <= end_date).all()
+    return render_template('TRADOC.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
-    return jsonify(precipitation_dict)
+@app.route("/api/v1.0/regions/CONUS")
+def CONUS():
+    
+    return render_template('CONUS.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
+
+@app.route("/api/v1.0/regions/OCONUS")
+def OCONUS():
+    
+    return render_template('OCONUS.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
+
+@app.route("/api/v1.0/types/Air")
+def AIR():
+    
+    
+    return render_template('AIR.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
+
+@app.route("/api/v1.0/types/Ground")
+def GROUND():
+    
+    
+    return render_template('GROUND.html', results="Results go here!")
+    #return jsonify(base_locations_dict)
 
 @app.route("/api/v1.0/report")
 def report():
     
-    precipitation_data = session.query(Measurement.date, Measurement.prcp).\
-    filter(Measurement.date > last_year).\
-    order_by(Measurement.date).all()
-    precipitation_df=pd.DataFrame(precipitation_data)
-    precipitation_dict = precipitation_df.to_dict()
-
-    return jsonify(precipitation_dict)
+    
+    return render_template('REPORT.htm')
+    #return jsonify(base_locations_dict)
 
 if __name__ == '__main__':
     app.run(debug=True)
