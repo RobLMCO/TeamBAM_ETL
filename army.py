@@ -176,7 +176,7 @@ def GROUND():
 def report():
     
     
-    return render_template('REPORT.htm')
+    return render_template('REPORT.html')
     #return jsonify(base_locations_dict)
 
 if __name__ == '__main__':
