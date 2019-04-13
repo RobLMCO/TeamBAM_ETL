@@ -4,7 +4,7 @@ ETL Project
 
 OBJECTIVE:
 
-The ACME Defense Company needs to create a database of all military sites it will provide services to.
+The ACME Defense Company needs to create a database of all military sites it will provide services to. In order to do this, they require an API that provides lists of sites by which customer organization it belongs to (command), region in which it is located, and type of RVCT product required to be serviced. In each case, the output will be a list of all the filtered sites, thier specific location in latitude and longitude coordinates, and the quantity of RVCT products by type requiring service.  
 
 In order to do its job, ACME needs specific location information for each customer location.
 
