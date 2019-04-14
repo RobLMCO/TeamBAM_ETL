@@ -16,7 +16,7 @@
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                   <div class="navbar-header">
-                  <a class="navbar-brand"  href="https://upload.wikimedia.org/wikipedia/commons/4/43/USAREUR_Insignia.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/4/43/USAREUR_Insignia.jpg"  alt= "FORSCOM" width="144" height="84" align="left"/></a>
+                  <a class="navbar-brand"  href="https://upload.wikimedia.org/wikipedia/commons/4/43/USAREUR_Insignia.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/4/43/USAREUR_Insignia.jpg"  alt= "USAREUR" width="340" height="250" align="left"/></a>
                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                       <span class="sr-only"></span>
                       <span class="icon-bar"></span>
@@ -50,7 +50,7 @@
                             <li><a href="/api/v1.0/types/Ground">Type:Ground</a></li>
                           </ul>
                           <ul><li><a href="../../../">Home</a></li></ul>
-                          <ul><li><a href="/api/v1.0/report">Report</a></li></ul>
+                          <ul><li><a href="https://roblmco.github.io/TeamBAM_ETL/">Report</a></li></ul>
                         </li>
                       </ul>
                     </div>
@@ -63,32 +63,56 @@
           </header>
       
           <div class="row">
-              <div class="col-md-8">
-                Query Results<BR>
-        
-                  
-                  <ul>
-                    <li> {{ results }} </li>
-                  </ul>
-                  
-                  <BR>
-                    <table border="1">
-            
-                      <thead>
-                        <tr>
-                        <th style="text-align: center; vertical-align: middle;" colspan="4">Results</th></tr>
-                      </thead>
+            <div class="col-md-5">
+              Total RVCTs: {{ total }}<BR>
+                <BR>
+                  <table border="1">
+          
+                    <thead>
+                      <tr>
+                      <th style="text-align: center; vertical-align: middle;" colspan="9">Results</th></tr>
+                    </thead>
+                    
+                    <thead>
+                      <tr style=\"text-align: right;\">
+                        <th></th>
+                        <th>Base</th>
+                        <th>State</th>
+                        <th>Command</th>
+                        <th>Region</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Type</th>
+                        <th>QTY</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
                       
-                      <tbody>
-                        <tr>
-                        <td>{{ results }}</td>
+                      
+                      {% for line in results  %}
+                        <tr> 
+                          <td>{{ line.0}}</td>
+                          <td>{{ line.1 }}</td>
+                          <td>{{ line.2 }}</td>
+                          <td>{{ line.3 }}</td>
+                          <td>{{ line.4 }}</td>
+                          <td>{{ line.5 }}</td>
+                          <td>{{ line.6 }}</td>
+                          <td>{{ line.7 }}</td>
+                          <td>{{ line.8 }}</td>
                         </tr>
-                      </tbody>
-                        
-                    </table>
-              
-                  </div>    
-          </div>     
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+
+                    
+                      
+                  </table>
+            
+                </div>    
+        </div>     
           </body>
         </div>      
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
