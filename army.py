@@ -108,49 +108,163 @@ def FORSCOM():
 
 @app.route("/api/v1.0/commands/CENTCOM")
 def CENTCOM():
+    results = []
+    centcom_quantity = 0
     
-    return render_template('CENTCOM.html', results="Results go here!")
+    centcom_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='CENTCOM'")
+
+    for total in centcom_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    centcom=engine.execute("SELECT * from base_locations where Command='CENTCOM'")
+
+    for result in centcom:
+        results.append(result)
+        print(result)
+
+    return render_template('CENTCOM.html', total=total, results=results)
     
 
 @app.route("/api/v1.0/commands/ARNG")
 def ARNG():
+    results = []
+    arng_quantity = 0
     
-    return render_template('ARNG.html', results="Results go here!")
+    arng_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='ARNG'")
+
+    for total in arng_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    arng=engine.execute("SELECT * from base_locations where Command='ARNG'")
+
+    for result in arng:
+        results.append(result)
+        print(result)
+
+    return render_template('ARNG.html', total=total, results=results)
     
 
 @app.route("/api/v1.0/commands/Training")
 def TRNG():
+    results = []
+    training_quantity = 0
     
+    training_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='Training'")
+
+    for total in training_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    training=engine.execute("SELECT * from base_locations where Command='Training'")
+
+    for result in training:
+        results.append(result)
+        print(result)
     
-    return render_template('Training.html', results="Results go here!")
+    return render_template('Training.html', total=total, results=results)
    
 
 @app.route("/api/v1.0/commands/USARPAC")
 def USARPAC():
+    results = []
+    usarpac_quantity = 0
     
+    usarpac_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='USARPAC'")
+
+    for total in usarpac_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    usarpac=engine.execute("SELECT * from base_locations where Command='USARPAC'")
+
+    for result in usarpac:
+        results.append(result)
+        print(result)
     
-    return render_template('USARPAC.html', results="Results go here!")
+    return render_template('USARPAC.html', total=total, results=results)
     
 
 @app.route("/api/v1.0/commands/USAREUR")
 def USAREUR():
+    results = []
+    usareur_quantity = 0
     
+    usareur_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='USAREUR'")
+
+    for total in usareur_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    usareur=engine.execute("SELECT * from base_locations where Command='USAREUR'")
+
+    for result in usareur:
+        results.append(result)
+        print(result)
     
-    return render_template('USAREUR.html', results="Results go here!")
+    return render_template('USAREUR.html', total=total, results=results)
     
 
 @app.route("/api/v1.0/commands/SOF")
 def SOF():
+    results = []
+    soccom_quantity = 0
     
+    soccom_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='SOF'")
+
+    for total in soccom_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    soccom=engine.execute("SELECT * from base_locations where Command='SOF'")
+
+    for result in soccom:
+        results.append(result)
+        print(result)
     
-    return render_template('SOCCOM.html', results="Results go here!")
+    return render_template('SOCCOM.html', total=total, results=results)
     
 
 @app.route("/api/v1.0/commands/TRADOC")
 def TRADOC():
+    results = []
+    tradoc_quantity = 0
     
+    tradoc_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='TRADOC'")
+
+    for total in tradoc_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    tradoc=engine.execute("SELECT * from base_locations where Command='TRADOC'")
+
+    for result in tradoc:
+        results.append(result)
+        print(result)
     
-    return render_template('TRADOC.html', results="Results go here!")
+    return render_template('TRADOC.html', total=total, results=results)
     
 
 @app.route("/api/v1.0/regions/CONUS")
