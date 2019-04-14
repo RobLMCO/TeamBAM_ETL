@@ -60,16 +60,50 @@ def api():
 
 @app.route("/api/v1.0/all")
 def all():
+    results = []
+    all_quantity = 0
     
+    all_quantity=engine.execute("SELECT SUM(Quantity) from base_locations")
+
+    for total in all_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    all=engine.execute("SELECT * from base_locations")
+
+    for result in all:
+        results.append(result)
+        print(result)
     
-    return render_template('ALL.html', results="Results go here!")
+    return render_template('ALL.html', total=total, results=results)
     
 
 
 @app.route("/api/v1.0/commands/FORSCOM")
 def FORSCOM():
+    results = []
+    forscom_quantity = 0
     
-    return render_template('FORSCOM.html', results="Results go here!")
+    forscom_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Command='FORSCOM'")
+
+    for total in forscom_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
+        print(total)
+
+    forscom=engine.execute("SELECT * from base_locations where Command='FORSCOM'")
+
+    for result in forscom:
+        results.append(result)
+        print(result)
+
+
+    return render_template('FORSCOM.html', total=total, results=results)
     
 
 @app.route("/api/v1.0/commands/CENTCOM")
@@ -126,6 +160,10 @@ def CONUS():
     conus_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Region='CONUS'")
 
     for total in conus_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
         print(total)
     
     conus=engine.execute("SELECT * from base_locations where Region='CONUS'")
@@ -143,6 +181,10 @@ def OCONUS():
     oconus_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where Region='OCONUS'")
 
     for total in oconus_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
         print(total)
     
     oconus=engine.execute("SELECT * from base_locations where Region='OCONUS'")
@@ -160,6 +202,10 @@ def AIR():
     air_rvct_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where type='Air RVCT'")
 
     for total in air_rvct_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
         print(total)
     
     air_rvct=engine.execute("SELECT * from base_locations where type='Air RVCT'")
@@ -178,6 +224,10 @@ def GROUND():
     ground_rvct_quantity=engine.execute("SELECT SUM(Quantity) from base_locations where type='Ground RVCT'")
 
     for total in ground_rvct_quantity:
+        total = str(total)
+        total = total.replace("(", "")
+        total = total.replace(")", "")
+        total = total.replace(",", "")
         print(total)
     
     ground_rvct=engine.execute("SELECT * from base_locations where type='Ground RVCT'")
